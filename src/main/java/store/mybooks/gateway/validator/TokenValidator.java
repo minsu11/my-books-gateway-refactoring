@@ -9,7 +9,6 @@ import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import store.mybooks.gateway.config.JwtConfig;
-import store.mybooks.gateway.config.KeyConfig;
 import store.mybooks.gateway.exception.ForbiddenAccessException;
 import store.mybooks.gateway.exception.StatusIsDormancyException;
 import store.mybooks.gateway.exception.StatusIsLockException;
@@ -36,8 +35,8 @@ public class TokenValidator {
     private static final String STATUS_ACTIVE = "활성";
 
     @Autowired
-    private TokenValidator(JwtConfig jwtConfig, KeyConfig keyConfig) {
-        Algorithm algorithm = Algorithm.HMAC512(keyConfig.keyStore(jwtConfig.getSecret()));
+    private TokenValidator(JwtConfig jwtConfig) {
+        Algorithm algorithm = Algorithm.HMAC512(jwtConfig.getSecret());
         jwtVerifier = JWT.require(algorithm).build();
     }
 

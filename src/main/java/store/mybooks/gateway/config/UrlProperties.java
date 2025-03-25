@@ -21,9 +21,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "url.name")
 public class UrlProperties {
     private String auth;
-    private final KeyConfig keyConfig;
+
 
     public void setAuth(String auth) {
-        this.auth = keyConfig.keyStore(auth);
+        this.auth = auth;
     }
 }

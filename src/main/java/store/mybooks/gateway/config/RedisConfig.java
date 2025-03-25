@@ -42,24 +42,25 @@ public class RedisConfig {
 
     @Value("${redis.database}")
     private String redisDatabase;
+// todo 우선 주석
 
-    @Value("${redis.key}")
-    private String redisKey;
-
-    @Value("${redis.value}")
-    private String redisValue;
-
-    private final KeyConfig keyConfig;
+//    @Value("${redis.key}")
+//    private String redisKey;
+//
+//    @Value("${redis.value}")
+//    private String redisValue;
+//
+//
 
     // properties 에 저장한 host , post 연결
     @Bean
     public RedisConnectionFactory redisConnectionFactory() {
 
         RedisStandaloneConfiguration redisStandaloneConfiguration =
-                new RedisStandaloneConfiguration(keyConfig.keyStore(redisHost),
-                        Integer.parseInt(keyConfig.keyStore(redisPort)));
-        redisStandaloneConfiguration.setPassword(keyConfig.keyStore(redisPassword));
-        redisStandaloneConfiguration.setDatabase(Integer.parseInt(keyConfig.keyStore(redisDatabase)));
+                new RedisStandaloneConfiguration(redisHost,
+                        Integer.parseInt(redisPort));
+        redisStandaloneConfiguration.setPassword(redisPassword);
+        redisStandaloneConfiguration.setDatabase(Integer.parseInt(redisDatabase));
 
         return new LettuceConnectionFactory(redisStandaloneConfiguration);
     }
